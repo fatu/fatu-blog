@@ -86,5 +86,5 @@ exclude_generator:
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: github
-  repository: git@github.com:fatu/fatu.github.com.git
+  repository: https://github.com/fatu/fatu.github.com.git
   branch: master

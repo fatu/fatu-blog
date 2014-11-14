@@ -1,8 +1,9 @@
 title: Scala Intro
 date: 2014-09-11 06:34:37
 tags:
+categories: Scala
 ---
-
+# Scala Intro
 **Scala** is an object-functional programming and scripting language.
 
 
@@ -34,7 +35,7 @@ On 12 May 2011, Odersky and collaborators launched Typesafe Inc., a company to p
 - Scala Console
 - WorkSheet
 - Ensime
-- Textmate/Sublime 
+- Textmate/Sublime
 
 ## **Scala Syntactic Sugar**
 
@@ -97,7 +98,7 @@ import java.util._
 
 class IntUnil(val number : Int) {
   def days() = this
-  
+
   def ago() = {
     val today = Calendar.getInstance()
     today.add(Calendar.DAY_OF_MONTH, -number)
@@ -140,20 +141,18 @@ until (x == 0) {
 ### Applying tail recursion
 
 ```scala
-def fact(number: Int) = {
-  @scala.annotation.tailrec
-  def factRecur(factorial: BigInt, number: Int) : BigInt = {
-    if (number == 1)
-      factorial
+def factorial(n: Int): BigInt = {
+  def factorial(n: Int, f: BigInt): BigInt = {
+    if (n == 1)
+      f
     else
-      factRecur(number * factorial, number - 1)
+      factorial(n - 1, n * f)
   }
-  
-  factRecur(BigInt(1), number)
+  factorial(n, BigInt(1))
 }
 
-println("Factorial of 5 is " + fact(5))
-println("Factorial of 10000 is " + fact(10000))
+factorial(5)
+factorial(10000)
 
 ```
 
@@ -226,7 +225,7 @@ abstract class Writer {
 
 class StringWriter extends Writer {
   val target = new StringBuilder
-  
+
   override def write(msg : String) = target.append(msg)
   override def toString = target.toString
 }
@@ -255,6 +254,7 @@ writeStuff(new StringWriter with UpperCaseFilter with ProfanityFilter)
 
 writeStuff(new StringWriter with ProfanityFilter with UpperCaseFilter)
 ```
+---
 
 ## **BDD**
 http://www.scalatest.org/
@@ -265,8 +265,11 @@ http://scalamock.org/
 ### Kata: PrimeFactor
 [CodingDojo](http://codingdojo.org/)
 
+---
 
-## **Killer Application**
+## **Killer Application - Scala tech stack**
+[Awesome-Scala](https://github.com/lauris/awesome-scala)
+
 ### Akka
 
 ```scala
@@ -318,7 +321,7 @@ object HelloAkkaScala extends App {
   val greetPrinter = system.actorOf(Props[GreetPrinter])
   // after zero seconds, send a Greet message every second to the greeter with a sender of the greetPrinter
   system.scheduler.schedule(0.seconds, 1.second, greeter, Greet)(system.dispatcher, greetPrinter)
-  
+
 }
 
 // prints a greeting
@@ -329,8 +332,7 @@ class GreetPrinter extends Actor {
 }
 
 ```
-
+### Spray
 ### Play
 ### Slick
 ### Spark
-
